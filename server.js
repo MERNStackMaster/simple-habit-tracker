@@ -8,7 +8,7 @@ const app = express();
 
 const PORT = process.env.PORT || 3001;
 // set MONGODB_URI in your config vars in Heroku
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/exampledb';
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/habittracker';
 
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
