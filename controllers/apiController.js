@@ -1,31 +1,17 @@
 const db = require('../models');
 
 module.exports = {
-	createUser: function(req, res) {
-		db.User.create(req.body)
-			.then(data => {
-				console.log(data);
-
-				res.send('User successfully added.');
-			})
-			.catch(err => console.log(err));
-	},
-	testCreateMetric: function(req, res) {
-		db.Metric.create({
-			name: 'Exercise'
-		}).then((data) => {
+	createMetric: function(req, res) {
+		db.Metric.create(req.body).then((data) => {
 			console.log(data);
 
 			res.send('Metric successfully created.');
 		}).catch(err => err);
 	},
-	testCreateRecord: function(req, res) {
-		db.Record.create({
-			value: false,
-			metric: 'Exercise'
-		}).then((data) => {
+	createRecord: function(req, res) {
+		db.Record.create(req.body).then((data) => {
 			return db.Metric.findOneAndUpdate({
-				name: 'Exercise' }, {
+				name: req.body.metric }, {
 				$push: { records: data._id }
 			}, { new: true });
 

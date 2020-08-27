@@ -1,10 +1,8 @@
 const Router = require('express').Router();
-const { createUser, testCreateMetric, testCreateRecord } = require('../controllers/apiController');
+const { createRecord, createMetric } = require('../controllers/apiController');
 
-Router.get('/', createUser);
+Router.post('/metrics/new', createMetric);
 
-Router.post('/testmetric', testCreateMetric);
-
-Router.post('/testrecord', testCreateRecord);
+Router.post('/records/new', createRecord);
 
 module.exports = Router;
