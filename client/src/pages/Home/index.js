@@ -5,6 +5,9 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 
+import LineChart from '../../components/LineChart';
+import RadarChart from '../../components/RadarChart';
+
 import API from '../../utils/API';
 
 class Home extends React.Component {
@@ -49,6 +52,11 @@ class Home extends React.Component {
 		return (
 			<Container fluid>
 				<Row>
+					<Col>
+						<RadarChart />
+					</Col>
+				</Row>
+				<Row>
 					{this.state.metrics.map((metric) => {
 						return (
 							<Col md={4} key={metric._id}>
@@ -56,7 +64,7 @@ class Home extends React.Component {
 								{metric.records.map((record) => {
 									return (
 										// this should be a chart
-										<p key={record._id}>{JSON.stringify(record.value + ' @ ' + record.createdAt)}</p>
+										<p key={record._id}>{JSON.stringify(record.value + ' @ ' + record.date)}</p>
 									);
 								})}
 
