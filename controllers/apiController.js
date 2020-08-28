@@ -23,13 +23,8 @@ module.exports = {
 		const now = new Date();
 		const today = `${now.getFullYear()}-${(now.getMonth()) + 1}-${now.getDate()}`; // 2020-08-27
 
-		console.log('This line ran');
-		console.log(today);
-
-
-
 		db.Record.findOneAndUpdate(
-			{ date: today, metric: req.body.metric }, // needs to check based on record id
+			{ date: today, metric: req.body.metric },
 			req.body,
 			{ upsert: true, new: true }
 		).then((data) => {
