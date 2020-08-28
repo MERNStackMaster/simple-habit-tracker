@@ -10,6 +10,10 @@ const recordSchema = new Schema({
 	metric: {
 		type: String,
 		required: true
+	},
+	date: {
+		type: String,
+		required: true
 	}
 }, {
 	timestamps: true

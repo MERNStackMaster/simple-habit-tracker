@@ -29,6 +29,14 @@ class NewMetric extends React.Component {
 		e.preventDefault();
 
 		API.createMetric(this.state)
+			.then((res) => {
+				console.log(res);
+
+				res.status === 200 ?
+					window.location.replace('/') :
+					console.log('Something went wrong.');
+			})
+			.catch(err => err);
 	};
 
 	render() {
@@ -36,22 +44,22 @@ class NewMetric extends React.Component {
 			<Container>
 				<Row>
 					<Col>
-					<Form>
-						<Form.Group controlId="formBasicEmail">
-							<Form.Label>What Metric do you want to track?</Form.Label>
-							<Form.Control
-								onChange={this.handleInputChange}
-								type="text"
-								placeholder="eg. Exercise"
-								value={this.state.name}
-								name="name"
-								required
-							/>
-						</Form.Group>
-						<Button onClick={this.handleFormSubmit} variant="primary" type="submit">
-							Add Metric
+						<Form>
+							<Form.Group controlId="formBasicEmail">
+								<Form.Label>What Metric do you want to track?</Form.Label>
+								<Form.Control
+									onChange={this.handleInputChange}
+									type="text"
+									placeholder="eg. Exercise"
+									value={this.state.name}
+									name="name"
+									required
+								/>
+							</Form.Group>
+							<Button onClick={this.handleFormSubmit} variant="primary" type="submit">
+								Add Metric
 						</Button>
-					</Form>
+						</Form>
 					</Col>
 				</Row>
 				{/* <main>

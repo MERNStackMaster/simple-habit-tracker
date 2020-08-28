@@ -7,9 +7,10 @@ const metricSchema = new Schema({
 		type: String, // exercise
 		required: true
 	},
-	records: [
-		{ type: Schema.Types.ObjectId, ref: 'Record' }
-	]
+	records: [{
+		type: Schema.Types.ObjectId,
+		ref: 'Record'
+	}]
 }, {
 	timestamps: true
 });
