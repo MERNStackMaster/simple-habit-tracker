@@ -15,7 +15,9 @@ class Home extends React.Component {
 		super();
 
 		this.state = {
-			metrics: []
+			metrics: [],
+			labels: [],
+			data: []
 		};
 	}
 
@@ -25,8 +27,24 @@ class Home extends React.Component {
 			.then((data) => {
 				console.log(data);
 
+				// TODO, move this to its own function, and update other areas state is set. currently line 64
+				let cumulativeScore = [];
+				data.forEach((metric) => {
+					console.log(metric.records);
+
+					let score = 0;
+					metric.records.forEach((rec) => {
+						console.log(rec.value)
+						rec.value ? score ++ : score--;
+					});
+					cumulativeScore.push(score);
+				});
+				console.log(cumulativeScore);
+
 				this.setState({
-					metrics: data
+					metrics: data,
+					labels: data.map(i => i.name),
+					data: cumulativeScore
 				});
 			});
 	}
@@ -42,8 +60,8 @@ class Home extends React.Component {
 		API.createRecord({ metric, value, today }).then(res => {
 			if (res.status === 200) {
 				API.getAllMetrics()
-				.then(res => res.json())
-				.then((data) => this.setState({ metrics: data }));
+					.then(res => res.json())
+					.then((data) => this.setState({ metrics: data }));
 			}
 		}).catch(err => console.log(err));
 	};
@@ -53,7 +71,22 @@ class Home extends React.Component {
 			<Container fluid>
 				<Row>
 					<Col>
-						<RadarChart />
+						<RadarChart
+							data={{
+								labels: this.state.labels,
+								datasets: [{
+									label: '',												// redundant
+									backgroundColor: 'rgba(179,181,198,0.2)',
+									borderColor: 'rgba(179,181,198,1)',
+									pointBackgroundColor: 'rgba(179,181,198,1)',
+									pointBorderColor: '#fff',
+									pointHoverBackgroundColor: '#fff',
+									pointHoverBorderColor: 'rgba(179,181,198,1)',
+									// each num in data => same index in labels.
+									data: this.state.data								// passed in (made up of cumul... scores of all metrics)
+								}],
+							}}
+						/>
 					</Col>
 				</Row>
 				<Row>
@@ -61,6 +94,7 @@ class Home extends React.Component {
 						return (
 							<Col md={4} key={metric._id}>
 								<h2>{metric.name}</h2>
+								{/* <LineChart /> */}
 								{metric.records.map((record) => {
 									return (
 										// this should be a chart
