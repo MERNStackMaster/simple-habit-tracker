@@ -19,6 +19,9 @@ module.exports = {
 			res.json(data);
 		}).catch(err => err);
 	},
+	getOneMetric: function(req, res) {
+		db.Metric.findById(req.params.id).then(data => res.json(data));
+	},
 	createRecord: function (req, res) {
 		const now = new Date();
 		const today = `${now.getFullYear()}-${(now.getMonth()) + 1}-${now.getDate()}`; // 2020-08-27

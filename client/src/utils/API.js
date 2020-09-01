@@ -1,6 +1,6 @@
 export default {
 	createMetric: function(data) {
-		return fetch('/api/metrics/new', {
+		return fetch('/api/metric/new', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
@@ -10,6 +10,9 @@ export default {
 	},
 	getAllMetrics: function () {
 		return fetch('/api/metrics');
+	},
+	getOneMetric: function(url) {
+		return fetch('/api' + url);
 	},
 	createRecord: function(data) {
 		return fetch('/api/records/new', {
