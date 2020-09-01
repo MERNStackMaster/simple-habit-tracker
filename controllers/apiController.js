@@ -6,7 +6,6 @@ module.exports = {
 
 		db.Metric.create(req.body)
 			.then((data) => {
-				console.log('This line won\'t run.');
 				console.log(data);
 				res.send('Metric successfully created.');
 			})

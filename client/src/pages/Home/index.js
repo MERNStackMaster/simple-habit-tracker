@@ -43,8 +43,6 @@ class Home extends React.Component {
 		const now = new Date();
 		const today = `${now.getFullYear()}-${(now.getMonth()) + 1}-${now.getDate()}`; // 2020-08-27
 
-		console.log(today);
-
 		API.createRecord({ metric, value, today }).then(res => {
 			if (res.status === 200) {
 				API.getAllMetrics()
